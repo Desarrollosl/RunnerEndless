@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   <title>RunnerEndless</title>
   <style>
     html, body {
@@ -22,9 +22,12 @@
 </head>
 <body>
   <div id="unityContainer"></div>
+
+  <!-- 🔧 NECESARIO para que createUnityInstance funcione -->
+  <script src="Build/RunnerEndless.loader.js"></script>
+
   <script>
     var buildUrl = "Build";
-    var loaderUrl = buildUrl + "/RunnerEndless.loader.js";
     var config = {
       dataUrl: buildUrl + "/RunnerEndless.data",
       frameworkUrl: buildUrl + "/RunnerEndless.framework.js",
@@ -37,7 +40,7 @@
 
     var container = document.querySelector("#unityContainer");
     createUnityInstance(container, config).then((unityInstance) => {
-      // Unity is loaded
+      // Unity loaded successfully
     }).catch((message) => {
       alert("Failed to load Unity: " + message);
     });
