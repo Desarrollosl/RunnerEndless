@@ -1,49 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <title>RunnerEndless</title>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      overflow: hidden;
-      background: #000;
-    }
-    #unityContainer {
-      width: 100%;
-      height: 100%;
-      position: fixed;
-      top: 0;
-      left: 0;
-    }
-  </style>
-</head>
-<body>
-  <div id="unityContainer"></div>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Unity WebGL Player | RunnerEndless</title>
+  </head>
+  <body style="text-align: center; padding: 0; border: 0; margin: 0;">
+    <canvas id="unity-canvas" width=1920 height=1080 tabindex="-1" style="width: 1920px; height: 1080px; background: #231F20"></canvas>
+    <script src="Build/RunnerEndless.loader.js"></script>
+    <script>
+      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        // Mobile device style: fill the whole browser client area with the game canvas:
+        var meta = document.createElement('meta');
+        meta.name = 'viewport';
+        meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
+        document.getElementsByTagName('head')[0].appendChild(meta);
 
-  <!-- 🔧 NECESARIO para que createUnityInstance funcione -->
-  <script src="Build/RunnerEndless.loader.js"></script>
+        var canvas = document.querySelector("#unity-canvas");
+        canvas.style.width = "100%";
+        canvas.style.height = "100%";
+        canvas.style.position = "fixed";
 
-  <script>
-    var buildUrl = "Build";
-    var config = {
-      dataUrl: buildUrl + "/RunnerEndless.data",
-      frameworkUrl: buildUrl + "/RunnerEndless.framework.js",
-      codeUrl: buildUrl + "/RunnerEndless.wasm",
-      streamingAssetsUrl: "StreamingAssets",
-      companyName: "YourCompany",
-      productName: "RunnerEndless",
-      productVersion: "1.0",
-    };
+        document.body.style.textAlign = "left";
+      }
 
-    var container = document.querySelector("#unityContainer");
-    createUnityInstance(container, config).then((unityInstance) => {
-      // Unity loaded successfully
-    }).catch((message) => {
-      alert("Failed to load Unity: " + message);
-    });
-  </script>
-</body>
+      createUnityInstance(document.querySelector("#unity-canvas"), {
+        dataUrl: "Build/RunnerEndless.data.gz",
+        frameworkUrl: "Build/RunnerEndless.framework.js.gz",
+        codeUrl: "Build/RunnerEndless.wasm.gz",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "DefaultCompany",
+        productName: "RunnerEndless",
+        productVersion: "1.0",
+        // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
+        // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
+      });
+    </script>
+  </body>
 </html>
