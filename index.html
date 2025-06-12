@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>RunnerEndless</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      background: #000;
+    }
+    #unityContainer {
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="unityContainer"></div>
+  <script>
+    var buildUrl = "Build";
+    var loaderUrl = buildUrl + "/RunnerEndless.loader.js";
+    var config = {
+      dataUrl: buildUrl + "/RunnerEndless.data",
+      frameworkUrl: buildUrl + "/RunnerEndless.framework.js",
+      codeUrl: buildUrl + "/RunnerEndless.wasm",
+      streamingAssetsUrl: "StreamingAssets",
+      companyName: "YourCompany",
+      productName: "RunnerEndless",
+      productVersion: "1.0",
+    };
+
+    var container = document.querySelector("#unityContainer");
+    createUnityInstance(container, config).then((unityInstance) => {
+      // Unity is loaded
+    }).catch((message) => {
+      alert("Failed to load Unity: " + message);
+    });
+  </script>
+</body>
+</html>
